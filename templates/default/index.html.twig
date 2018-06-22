@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% import "default/_macros.html.twig" as macros %}
+
+
+{% set aNumber = 3 %}
+
+{% block title %}{{ parent() }} - Hello {{ person.firstname }}!{% endblock %}
+
+{% block body %}
+    <h1>Hello {{ person.firstname }}</h1>
+
+    <div class="container">
+        {{ macros.btn('Test de button') }}
+
+    {{ person.sayHello('szdefgr') }}<br />
+    <div class="alert alert-info">{{ person.sayHello() }}</div><br />
+
+    </div>
+
+
+    {{ person.firstname | capitalize }}
+
+    {{ parent() }}
+
+    <a href="{{ path('person_edit', { id: person.id }) }}" target="_blank">Modifier</a>
+
+    {{ block('title') }}
+
+
+    {{ 'HELLO' | monSuperFiltre   }}
+
+    {{ dump(person) }}
+
+    {% if aNumber in [ 3 ] %}
+        Youpi tu sais copier
+    {% else %}
+        Non tu sais pas 
+    {% endif %}
+
+    {# <ul> #}
+
+    {{ persons | length }}
+
+    {% for item in persons %}
+        {% include "default/_partial.html.twig" with { person: item } %}
+
+        {% embed "default/_profile_video.html.twig" %}
+            {% block title %}Le titre surcharge {{ item }}{% endblock %}
+        {% endembed %}
+
+        {# <li>{{ loop.index0 is odd ? 'odd' : 'even' }} - {{ item }}</li>
+    {% else %}
+        <li>Aucun resultat <a href="{{ path('person_new') }}">Creer</a></li> #}
+    {% endfor %}
+    {# </ul> #}
+
+{% endblock %}
+
+

@@ -1,0 +1,5 @@
+{% macro btn(label, color = "blue") %}
+    <a class="btn" style="color: {{ color }}">
+        <span color="{{ color }}">{{ label | title }}</span>
+    </a>
+{% endmacro %}
